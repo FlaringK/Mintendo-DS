@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'DSware';
-    src: url('https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/Fonts/Nintendo-DS-BIOS.ttf');
+    src: url('Fonts/Nintendo-DS-BIOS.ttf');
 }
 @font-face {
     font-family: 'DSsmall';
-    src: url('https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/Fonts/trigger-light.ttf');
+    src: url('Fonts/trigger-light.ttf');
 }
 
 :root {
