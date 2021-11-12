@@ -1,5 +1,9 @@
 const timer = ms => new Promise(res => setTimeout(res, ms))
 
+document.addEventListener('DOMContentLoaded', function() {
+
+
+
 //===============//
 // BOTTOM SCREEN //
 //===============//
@@ -288,3 +292,5 @@ let UpdateRibbonClock = () => {
 }
 
 var run2 = setInterval(UpdateRibbonClock, 500);
+
+}, false);
