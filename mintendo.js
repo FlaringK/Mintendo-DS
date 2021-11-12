@@ -271,7 +271,12 @@ let UpdateFace = () => {
 	drawDsClockFull(Clockctx)
 }
 
-var run = setInterval(UpdateFace, 1000);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+	var run = setInterval(UpdateFace, 1000);
+	var run2 = setInterval(UpdateRibbonClock, 500);
+}, false);
 
 let i = 0
 let UpdateRibbonClock = () => {
@@ -292,4 +297,4 @@ let UpdateRibbonClock = () => {
 	i++
 }
 
-var run2 = setInterval(UpdateRibbonClock, 500);
+
