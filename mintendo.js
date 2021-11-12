@@ -150,11 +150,7 @@ let createDSCalander = () => {
 	DSRibbonDate.innerText = monthIndex + "/" + year.toString().substring(2)
 }
 
-document.addEventListener('DOMContentLoaded', createDSCalander(), false);
-
 //Draw DS CLOCK
-
-
 
 let drawDsClockFace = (ctx) => {
 	const NumCoords = [
