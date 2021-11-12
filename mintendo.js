@@ -102,6 +102,8 @@ function changeBannerBtext(heading, desript) {
 
 
 let createDSCalander = () => {
+	startClocks()
+	
 	const DsCalandList = document.getElementById('DsCalandList');
 	const DsMonth = document.getElementById('DsMonth');
 	const DSRibbonDate = document.getElementById('DSRibbonDate');
@@ -267,12 +269,9 @@ let UpdateFace = () => {
 	drawDsClockFull(Clockctx)
 }
 
-var run;
-var run2;
-
 let startClocks = () => {
-	run = setInterval(UpdateFace, 1000);
-	run2 = setInterval(UpdateRibbonClock, 500);
+	var run = setInterval(UpdateFace, 1000);
+	var run2 = setInterval(UpdateRibbonClock, 500);
 }
 
 let i = 0
