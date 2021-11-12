@@ -1,0 +1,199 @@
+<head>
+  <link rel="icon" type="image/x-icon" href="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings.png" />
+  <title> Mintendo DS Simulator </title>
+  <meta property="og:title" content="Mintendo DS Simulator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://flaringk.github.io/Mintendo-DS" />
+  <meta property="og:image" content="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings.png" />
+  <meta property="og:description" content="The classic handheld from your childhood, right in the palm of your computer" />
+  <meta name="theme-color" content="#d7d7d7">
+  
+  <script src="mintendo.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div id=title><h3>Mintendo DS Simulator</h3>
+Made by FlaringK<br><br>A single webpage menu screen. I don't currently have all the sprites, specifically the banner icons. But I'll make sure to update this page when I find them.</div>
+
+<div class="DsTopWrap">
+	<div id="BrightnessTop" class="Brightness"></div>
+	
+	<input type="checkbox" id="DSTopLift" name="DSTopLift">
+	
+	<div class="DsRibbon">
+		<div class="DsRibbonIcon" style="--w: 9; text-align: left">FlaringK</div>
+		<div id="DSRibbonTime" class="DsRibbonIcon">23 45</div>
+		<div id="DSRibbonDate" class="DsRibbonIcon">11/03</div>
+		<div class="DsRibbonIcon" style="--w: 1">
+			<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Wifi.png">
+		</div>
+		<div class="DsRibbonIcon" style="--w: 1">
+			<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/M.png">
+		</div>
+		<div class="DsRibbonIcon" style="--w: 1">
+			<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Bat.png">
+		</div>
+	</div>
+	
+	<div id="DsClock" class="DsModule"> 
+		<canvas id="DsClockCanva" height="95" width="95"></canvas>
+	</div>
+	
+	<div id="DsMonth" class="DsHeader"> 11/2003 </div>
+	<div id="DsCaland" class="DsModule">
+		<ul id="DsCalandList" class="DsUnitList">
+		</ul>
+	</div>
+	
+	<div class="DsBannerList">
+		<input type="checkbox" id="DSBannerLift" name="DSBannerLift">
+		<div class="DsBanner" id="DsBa">
+			<h>Settings</h>
+			<p>Change system settings here. Select the setting you'd like to change.</p>
+		</div>
+		<div class="DsBanner" id="DsBb">
+			<h>Options</h>
+			<p>Change other settings.</p>
+		</div>
+	</div>
+	
+</div>
+<br>
+<div class="DsBottomWrap">
+	<div id="Brightnessbottom" class="Brightness"></div>
+	
+	<input type="checkbox" id="Dsdownload" name="Dsdownload" onclick="syncScreensDownload()">
+	<input type="checkbox" id="DSpicto" name="DSpicto" onclick="syncScreenPicto()">
+	<input type="checkbox" id="DSsettings" name="DSsettings" onclick="syncScreenSettings()">
+  <label for="DSsettings" onclick="syncScreenSettings()">
+  	<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings.png">
+  </label>
+	
+	<div id="DsTouchHome">
+		<a href="https://flaringk.github.io/Portfolio/">
+			<div id="DsCard" class="DsTouchMod">
+			<div class="DSGameTitle">DS screen created by FlaringK</div>
+			<img class="DsGameIcon" src=https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Ididart/Symbol.png>
+		</div>
+		</a>
+		<label for="DSpicto" onclick="syncScreenPicto()">
+			<div id="PictoChat" class="DsTouchMod">
+			<img id="PictoChatImg" src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/PictoChatLogo.png">
+			<div class="ConnectIcon"><img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Connect.png"></div>
+		</div>
+		</label>
+		<label for="Dsdownload" onclick="syncScreensDownload()">
+			<div id="DownloadPlay" class="DsTouchMod">
+			<div class="DSTouchModHeader">DS Download Play</div>
+			<img id="DownloadPlayImg" src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Ds2Ds.png">
+			<div class="ConnectIcon"><img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Connect.png"></div>
+		</div>
+		</label>
+		<div id="GamePak" class="DsTouchMod Unfound">
+			<div class="DSGameTitle">There is no Game Pak inserted</div>
+			<img class="DsGameIcon" src=https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/GBAcart.png>
+		</div>
+		
+		<div id=Minicons>
+			<img class="DsTouchMinicon" onclick="changeBright()" src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Brightness.png">
+			<img class="DsTouchMinicon" src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Alarm.png">
+		</div>
+	</div>
+	
+	<div id="DsTouchSettings">
+		<label for="DSsettings" onclick="syncScreenSettings()">
+  		<div class="DsButton">&lt; Quit</div>
+  	</label>
+		
+		<div class="DsSetIcons Root" style="--l: 3">
+			<input type="radio" class="DsOpenIcon" name="DsOpenIcon"  onclick="fadeRoots('Touch Screen', 'I know this is not perfect, but for now I think this is good.')">
+			<div class="DsFader" onclick="openRoots()"></div>
+			<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_calibrate.gif">
+		</div>
+		<div class="DsSetIcons Root" style="--l: 2">
+			<input type="radio" class="DsOpenIcon" name="DsOpenIcon" onclick="fadeRoots('User', 'Enter user information')">
+			<div class="DsFader" onclick="openRoots()"></div>
+			<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_profile.gif">
+			
+			<div class="DsSetIconsBranchWrap">
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_nickname.gif">
+				</div>
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_background.gif">
+				</div>
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_message.gif">
+				</div>
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_birthday.gif">
+				</div>
+			</div>
+			
+		</div>
+		<div class="DsSetIcons Root" style="--l: 1">
+			<input type="radio" class="DsOpenIcon" name="DsOpenIcon" onclick="fadeRoots('Clock', 'Change date, time, and alarm settings.')">
+			<div class="DsFader" onclick="openRoots()"></div>
+			<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_clockdate.gif">
+			
+			<div class="DsSetIconsBranchWrap">
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_clock.gif">
+				</div>
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_date.gif">
+				</div>
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_alarm.gif">
+				</div>
+			</div>
+			
+		</div>
+		<div class="DsSetIcons Root" style="--l: 0">
+			<input type="radio" class="DsOpenIcon" name="DsOpenIcon" onclick="fadeRoots('Options', 'Change other settings.')">
+			<div class="DsFader" onclick="openRoots()"></div>
+			<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_wrench.gif">
+			
+			<div class="DsSetIconsBranchWrap">
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_language.gif">
+				</div>
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_auto.gif">
+				</div>
+				<div class="DsSetIconsBranch">
+					<img src="https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/DS%20images/Settings/icon_agb.gif">
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="DsTouchRibbon"></div>
+		<div class="DsTouchRibbon"></div>
+	</div>
+	
+	<div id="DsTouchDownload">
+		<label for="Dsdownload" onclick="syncScreensDownload()">
+  		<div class="DsButton">&lt; Quit</div>
+  	</label>
+		
+		<div class="DsNotice">Sorry, but there isn't much here.</div>
+		
+		<div class="DsTouchRibbon"></div>
+		<div class="DsTouchRibbon"></div>
+	</div>
+	
+	<div id="DsTouchPicto">
+		<label for="DSpicto" onclick="syncScreenPicto()">
+  		<div class="DsButton">&lt; Quit</div>
+  	</label>
+		
+		<div class="DsNotice">I'll get this working one day.</div>
+		
+		<div class="DsTouchRibbon"></div>
+		<div class="DsTouchRibbon"></div>
+	</div>
+	
+</div>
+</body>

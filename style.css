@@ -1,0 +1,814 @@
+@font-face {
+    font-family: 'DSware';
+    src: url('https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/Fonts/Nintendo-DS-BIOS.ttf');
+}
+@font-face {
+    font-family: 'DSsmall';
+    src: url('https://pipe.miroware.io/5f586dbe02740c4a7fb69f99/Personal%20Sites/Fonts/trigger-light.ttf');
+}
+
+:root {
+	--unit: 24px;
+	--gridColor: #C7C7C7;
+	--gridColorTouch: #AEAEAE;
+	--scanColor: #E7E7E7;
+	--shadColor: #D7D7D7;
+	--bgColor: white;
+	
+	--scanPattern: linear-gradient(to bottom, var(--scanColor) 50%, transparent 1px);
+	--ribbonPattern: linear-gradient(180deg, rgba(142,166,182,1) 0%, rgba(97,134,158,1) 100%);
+}
+body {
+	font-family: 'DSware';
+	image-rendering: pixelated;
+	background: var(--shadColor);
+}
+body > div {
+	margin: auto;
+	overflow: hidden;
+}
+
+#title {
+	text-align: center;
+	padding: 10px;
+	font-size: 20px;
+	width: calc(var(--unit) * 16 - 2px);
+}
+#title h3 {
+	margin: 0
+}
+
+/* STATIC */
+/* Brightness */
+.Brightness {
+	pointer-events: none;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	
+	z-index: 10
+}
+
+/* ================= */
+/* DS Top Background */
+/* ================= */
+.DsTopWrap {
+	position: relative;
+	width: calc(var(--unit) * 16 - 2px);
+	height: calc(var(--unit) * 12 - 2px);
+	
+	background-size: var(--unit) var(--unit);
+	background-image:
+    linear-gradient(to right, var(--gridColor) 2px, transparent 1px),
+    linear-gradient(to bottom, var(--gridColor) 2px, transparent 1px);
+	background-position: -2px -2px;
+	
+	font-family: 'DSware';
+	font-size: 0;
+	line-height: calc(var(--unit) - 2px);
+}
+.DsTopWrap::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	
+	background-color: var(--bgColor);
+	background-size: auto calc(var(--unit)/8);
+	background-image: var(--scanPattern);
+	background-position: -2px -2px;
+	
+	z-index: -2;
+}
+
+/* DS Top Modules */
+.DsModule {
+	--w: 4;
+	--h: 4;
+	--t: 1;
+	--l: 1;
+	
+	position: absolute;
+	top: calc(var(--unit) * var(--t) - 2px);
+	left: calc(var(--unit) * var(--l) - 2px);
+	z-index: 1;
+	
+	width: calc(var(--unit) * var(--w) + 2px);
+	height: calc(var(--unit) * var(--h) + 2px);
+	
+	outline: var(--shadColor) solid 2px;
+	
+	background: #fff6;
+	padding-top: 4px;
+	box-sizing: border-box;
+	
+	transition: top 0.1s linear;
+}
+.DsModule::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	
+	border: solid black 2.5px;
+	pointer-events: none;
+}
+.DsModule canvas {
+	position: absolute;
+	top: 2px; left: 2px;
+	width: calc(var(--unit) * var(--w) - 4px);
+	height: calc(var(--unit) * var(--h) - 4px);
+}
+
+.DsHeader {
+	--w: 4;
+	--h: 4;
+	--t: 1;
+	--l: 1;
+	
+	position: absolute;
+	top: calc(var(--unit) * var(--t));
+	left: calc(var(--unit) * var(--l));
+	z-index: 0;
+	
+	width: calc(var(--unit) * var(--w) - 2px);
+	height: calc(var(--unit) * var(--h) - 2px);
+	
+	background: white;
+	
+	text-align: center;
+	font-size: var(--unit);
+	line-height: calc(var(--unit) - 2px);
+	letter-spacing: 5px;
+	
+	transition: top 0.1s linear;
+}
+
+.DsUnitList {	
+	padding: 0;
+	line-height: 0;
+}
+.DsUnitList li {
+	--bcolor: #969696;
+	display: inline-block;
+	
+	width: var(--unit);
+	height: var(--unit);
+	padding-left: 3px;
+	
+	font-family: 'DSsmall';
+	font-size: calc(var(--unit)/2);
+	text-align: center;
+	line-height: calc(var(--unit) - 2px);
+	
+	margin: -2px -2px 2px 2px;
+	box-sizing: border-box;
+	border: 2px solid var(--bcolor);
+	border-left: none;
+	border-top: none;
+	
+	background: white;
+	color: black;
+}
+
+.DsRibbon {
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	
+	height: var(--unit);
+	
+	box-sizing: border-box;
+	border-bottom: solid black 2px;
+	
+	background: rgb(142,166,182);
+	background: var(--ribbonPattern);
+	
+	white-space: nowrap;
+	font-family: 'DSsmall';
+	color: white;
+	
+	z-index: 1;
+}
+.DsRibbonIcon {
+	--w: 2;
+	display: inline-block;
+	position: relative;
+	
+	width: calc(var(--unit) * var(--w));
+	height: var(--unit);
+	padding: 0 calc(var(--unit)/4);
+	box-sizing: border-box;
+	
+	border-right: dashed #494949;
+	font-size: calc(var(--unit)/2);
+	
+	text-align: center;
+}
+.DsRibbonIcon:after {
+	content: ".";
+	color: transparent;
+}
+.DsRibbonIcon:last-of-type{
+	border: none;
+}
+.DsRibbonIcon img {
+	position: absolute;
+  top: calc(50% - 1px);
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	width: calc(var(--unit)/1.5);
+}
+
+/* Individual Top Modules */
+#DsClock {
+	--w: 6;
+	--h: 6;
+	--t: 3;
+	--l: 1;
+	
+}
+
+#DsCaland {
+	--w: 7;
+	--h: 6;
+	--t: 3;
+	--l: 8;
+}
+
+#DsMonth {
+	--w: 7;
+	--h: 1;
+	--t: 2;
+	--l: 8;
+}
+
+#DStoday {
+	position: relative;
+	z-index: 0;
+}
+#DStoday::before {
+	content: '';
+	position: absolute;
+	top: 3px; left: 3px; right: 2px; bottom: 2px;
+	
+	background: #D7DFE7;
+	border: solid 2px #7596A6;
+	z-index: -1
+}
+#DStoday::after {
+	content: '';
+	position: absolute;
+	top: 3px; left: 3px; right: 2px; bottom: 2px;
+	
+	border: dashed 2px #45657D;
+	z-index: -1
+}
+
+/* Settings Banners */
+.DsBannerList {
+	position: absolute;
+	bottom: calc(var(--unit)*-3); left: 0; right: 0;
+	
+	height: calc(var(--unit)*3);
+	transition: bottom 0.25s linear;
+}
+.DsBanner {
+	position: absolute;
+	bottom: 0; left: 0; right: 0;
+	
+	height: calc(var(--unit)*3);
+	padding-left: calc(var(--unit)*3);
+	
+	box-sizing: border-box;
+	border-top: 2px black solid;
+	background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(199,199,199,1) 50%);
+	
+	font-size: var(--unit);
+	
+	transition: bottom 0.15s linear;
+	
+	z-index: 4;
+}
+.DsBanner h::before {
+	content: "l";
+	opacity: 0;
+}
+.DsBanner p {
+	margin: 0;
+	
+	background: #222;
+	color: white;
+	
+	border: solid white 0.08em;
+	border-radius: calc(var(--unit)/5);
+	padding: 0 0.1em 0.1em;
+	
+	min-height: 1.7em
+}
+.DsBanner p:first-line {
+	line-height: 0.8em;
+}
+
+/* ==================== */
+/* DS HOME Touch Screen */
+/* ==================== */
+.DsBottomWrap {
+	--gridColor: var(--gridColorTouch);
+	
+	position: relative;
+	width: calc(var(--unit) * 16 - 2px);
+	height: calc(var(--unit) * 12 - 2px);
+	
+	background-size: calc(var(--unit) * 3) calc(var(--unit) * 3);
+	background-image:
+    linear-gradient(to right, var(--gridColor) 2px, transparent 1px),
+    linear-gradient(to bottom, var(--gridColor) 2px, transparent 1px);
+	background-position: calc(var(--unit) * 2 - 2px) calc(var(--unit) * 1.5 - 2px);
+	
+	font-family: 'DSware';
+	font-size: 0;
+}
+.DsBottomWrap::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	
+	background-color: var(--bgColor);
+	background-size: auto calc(var(--unit)/8);
+	background-image: var(--scanPattern);
+	background-position: -2px -2px;
+	
+	z-index: -5;
+	pointer-events: none;
+}
+.DsBottomWrap::after {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	
+  background-image: radial-gradient(var(--gridColor) calc(var(--unit)/10), transparent 0);
+	background-size: calc(var(--unit) * 3) calc(var(--unit) * 3);
+	background-position: calc(var(--unit) * 0.5 - 1px) calc(var(--unit) * 0 - 1px);
+	pointer-events: none;
+	
+	z-index: -1;
+} 
+
+/* DS Touch Modules */
+.DsTouchMod {
+	--w: 4;
+	--t: 0;
+	--l: 0;
+	
+	position: absolute;
+	top: calc(var(--unit) * var(--t) * 3 + var(--unit) * 1.5 + var(--unit)/10);
+	left: calc(var(--unit) * var(--l) * 3 + var(--unit) * 2 + var(--unit)/10);
+	z-index: 1;
+	
+	width: calc(var(--unit) * 3 * var(--w) - var(--unit)/10 * 3);
+	height: calc(var(--unit) * 3 - var(--unit)/10 * 3);
+	
+	box-sizing: border-box;
+	
+	border: solid white 2px;
+	outline: solid black 2px;
+	background: whtie;
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(199,199,199,1) 100%);
+	
+	transition: top 0.25s linear;
+}
+.DsTouchMod.Unfound {
+	outline: solid 2px #E7E7E7;
+	background: var(--bgColor);
+	background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(239,239,239,1) 100%);
+}
+
+.DSTouchModHeader {
+	font-family: 'DSsmall';
+	font-size: calc(var(--unit)/2);
+	text-align: center;
+	outline: #7D7D7D solid 0.15em;
+	border-top: solid 0.15em #E7E7E7;
+	margin: calc(var(--unit)/20);
+	line-height: calc(var(--unit)/2);
+	padding-bottom: 0.15em;
+	
+	background: white;
+}
+.DsGameIcon {
+	position: absolute;
+	width: calc(var(--unit)*2);
+	
+	top: calc(50% - 1px);
+	left: calc(var(--unit)/3);
+	transform: translateY(-50%);
+}
+
+.DSGameTitle {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: calc(var(--unit) * 9 - 4px);
+	
+	box-sizing: border-box;
+	
+	text-align: center;
+	font-size: var(--unit);
+	
+	border: var(--gridColor) solid 2px;
+	border-left-color: #7D7D7D;
+	background-color: white;
+	background-size: auto calc(var(--unit)/8);
+	background-image: var(--scanPattern);
+	
+	padding-top: calc(var(--unit)/3);
+	
+	color: black;
+}
+.Unfound .DSGameTitle {
+	background-image: none;
+	border-color: #E7E7E7;
+	
+	color: #A6A6A6;
+}
+
+.ConnectIcon {
+	position: absolute;
+	bottom: calc(var(--unit)/-10 * 2);
+	right: calc(var(--unit)/-10 * 2);
+}
+.ConnectIcon img {
+	width: var(--unit)
+}
+
+.DsTouchMinicon {
+	position: absolute;
+	width: calc(var(--unit)/1.5);
+	bottom: calc(var(--unit)/2.75);
+	left: calc(var(--unit)/1.5);
+	
+	cursor: pointer;
+}
+.DsTouchMinicon:last-of-type {
+	left: auto;
+	right: calc(var(--unit)/1.5);
+}
+
+/* Individual Touch Modules */
+#PictoChat {
+	--w: 2;
+	--t: 1;
+	--l: 0;
+	
+	cursor: pointer;
+}
+
+#DownloadPlay {
+	--w: 2;
+	--t: 1;
+	--l: 2;
+	
+	cursor: pointer;
+}
+
+#GamePak {
+	--w: 4;
+	--t: 2;
+	--l: 0;
+}
+
+#PictoChatImg {
+	position: absolute;
+  top: calc(50% - 1px);
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	height: calc(var(--unit)/1.6)
+}
+#DownloadPlayImg {
+	position: absolute;
+  top: calc(50% + var(--unit)/2.25);
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	height: calc(var(--unit))
+}
+
+/* ======================== */
+/* DS SETTINGS Touch Screen */
+/* ======================== */
+.DsTouchRibbon {
+	position: absolute;
+	top: calc(var(--unit) * -1.5); left: 0; right: 0;
+	
+	height: calc(var(--unit) * 1.5);
+	
+	box-sizing: border-box;
+	border-bottom: solid black 2px;
+	
+	background: rgb(142,166,182);
+	background: var(--ribbonPattern);
+	
+	white-space: nowrap;
+	font-family: 'DSsmall';
+	color: white;
+	z-index: 1;
+	
+	transition: top 0.25s linear, bottom 0.25s linear;
+	transition-delay: 1.5s;
+}
+.DsTouchRibbon:last-of-type {
+	top: auto;
+	bottom: calc(var(--unit) * -1.5);
+	
+	transform: rotate(180deg);
+}
+
+.DsSetIcons.Root {
+	--l: 0;
+	
+	position: absolute;
+	bottom: calc(var(--unit)*1.5 + 2px);
+	left: calc(var(--unit)*-3);
+	
+	width: calc(var(--unit)*3 - 4px);
+	height: calc(var(--unit)*3 - 4px);
+	
+	z-index: 1;
+	
+	transition: left calc(0.20s + var(--l)*0.12s) linear;
+	transition-delay: 1.75s;
+}
+.DsSetIcons img {
+	width: calc(var(--unit)*3 - 4px);
+	pointer-events: none;
+}
+.DsFader {
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	
+	background: #fff6;
+	z-index: -1;
+}
+.DsSetIcons input {
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	height: calc(var(--unit)*2.6) !important;
+	width: calc(var(--unit)*2.6) !important;
+	
+	opacity: 0;
+	
+	z-index: 10;
+	cursor: pointer;
+}
+
+.DsSetIconsBranchWrap {
+	position: absolute;
+	width: calc(var(--unit)*3 - 4px);
+	height: calc(var(--unit)*3 - 4px);
+	
+	bottom: 0;
+	z-index: -1;
+	
+	transition: bottom 0.15s linear;
+}
+.DsSetIconsBranch {
+	position: absolute;
+	left: 0; bottom: 0;
+	
+	transition: bottom 0.15s linear, left 0.15s linear;
+	transition-delay: 0.15s;
+}
+.DsSetIconsBranch:first-of-type {
+	z-index: 1
+}
+.DsFader {
+	cursor: pointer;
+}
+
+.DsButton {
+	position: absolute;
+	bottom: calc(var(--unit)*-1);
+	left: 50%;
+	transform: translateX(-50%);
+	
+	width: calc(var(--unit)*5);
+	height: calc(var(--unit)*0.75);
+	text-align: center;
+	
+	background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(160,160,160,1) 100%);
+	outline: #777 solid 2px;
+	padding: 0.1em;
+	z-index: 10;
+	font-size: var(--unit);
+	
+	transition: bottom 0.25s linear;
+	transition-delay: 2s;
+	
+	cursor: pointer;
+}
+
+/* ================== */
+/* DS DOWNLOAD Screen */
+/* ================== */
+
+#DsTouchDownload {
+	opacity: 0;
+	transition: opacity 0.1s;
+	pointer-events: none;
+}
+.DsNotice {
+	position: absolute;
+	top: calc(var(--unit)* 14);
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	
+	width: calc(var(--unit)* 13);
+	height: calc(var(--unit)* 4);
+	line-height: calc(var(--unit)*4 - var(--unit)/1.5);
+	box-sizing: border-box;
+	
+	border: darkorange solid calc(var(--unit)/4);
+	border-radius: calc(var(--unit)/2);
+	
+	z-index: 1 !important;
+
+	background-color: black;
+	background-size: auto calc(var(--unit)/8);
+	background-image: linear-gradient(to bottom, #333 50%, transparent 1px);
+	
+	font-size: calc(var(--unit));
+	text-align: center;
+	color: white;
+	
+	transition: top 0.25s linear;
+	transition-delay: 1.75s;
+}
+.DsNotice:before {
+	content: '';
+	position: absolute;
+	top: calc(var(--unit)/-4); left: calc(var(--unit)/-4); right: calc(var(--unit)/-4); bottom: calc(var(--unit)/-4);
+	
+	border: black solid calc(var(--unit)/12);
+	border-radius: calc(var(--unit)/2);
+}
+
+#DsTouchPicto {
+	opacity: 0;
+	transition: opacity 0.1s;
+	pointer-events: none;
+}
+
+/* ANITMATION */
+
+/* ======== */
+/* Settings */
+/* ======== */
+
+input[type=checkbox] {
+	height: 0;
+}
+
+/* Lift top modules */
+#DSTopLift:checked ~ .DsModule, #DSTopLift:checked ~ .DsHeader {
+	top: calc(var(--unit) * (var(--t) - 1) - 2px);
+}
+#DSTopLift:checked ~ .DsBannerList {
+	bottom: 0
+}
+
+/* Fade homescreen */
+#DsTouchHome {
+	transition: opacity 0.8s;
+}
+label[for=DSsettings] img {
+	position: absolute;
+	width: calc(var(--unit)*1.25);
+	bottom: 1px;
+	left: 50%;
+	transform: translateX(-50%);
+	cursor: pointer;
+	z-index: 2;
+	
+	transition: bottom 0.6s linear;
+}
+#DSsettings:checked ~ #DsTouchHome {
+	opacity: 0;
+	pointer-events: none;
+}
+#DSsettings:checked ~ label[for=DSsettings] img {
+	bottom: calc(var(--unit)*12)
+}
+#DSsettings:checked ~ #DsTouchSettings .DsButton {
+	bottom: calc(var(--unit)*0.25);
+}
+
+/* Enter Settings */
+#DsTouchSettings {
+	opacity: 0;
+	transition: opacity 0.1s;
+	pointer-events: none;
+}
+#DSsettings:checked ~ #DsTouchSettings {
+	opacity: 1;
+	pointer-events: auto;
+}
+#DSsettings:checked ~ #DsTouchSettings .DsTouchRibbon {
+	top: 0;
+}
+#DSsettings:checked ~ #DsTouchSettings .DsTouchRibbon:last-of-type {
+	top: auto;
+	bottom: 0
+}
+#DSsettings:checked ~ #DsTouchSettings .DsSetIcons {
+	left: calc(var(--unit)*2 + var(--unit)*var(--l)*3);
+}
+
+
+/* Fade Root Icons */
+.DsOpenIcon:checked {
+	z-index: -1;
+}
+.DsOpenIcon:checked ~ .DsSetIconsBranchWrap {
+	bottom: calc(var(--unit)*3);
+}
+.DsOpenIcon:checked ~ .DsSetIconsBranchWrap .DsSetIconsBranch:nth-of-type(2){
+	bottom: calc(var(--unit)*3 - 1px)
+}
+.DsOpenIcon:checked ~ .DsSetIconsBranchWrap .DsSetIconsBranch:nth-of-type(3){
+	left: calc(var(--unit)*3 - 1px)
+}
+.DsOpenIcon:checked ~ .DsSetIconsBranchWrap .DsSetIconsBranch:nth-of-type(4){
+	left: calc(var(--unit)*-3 + 1px)
+}
+
+/* Lift other banner */
+.DsBanner:last-of-type {
+	bottom: calc(var(--unit)*-3) !important
+}
+#DSBannerLift:checked ~ .DsBanner:first-of-type {
+	bottom: var(--unit)
+}
+#DSBannerLift:checked ~ .DsBanner:last-of-type {
+	bottom: 0 !important
+}
+
+/* ======== */
+/* Download */
+/* ======== */
+
+#Dsdownload:checked ~ #DsTouchHome {
+	opacity: 0;
+	pointer-events: none;
+}
+#Dsdownload:checked ~ #DsTouchHome #DownloadPlay {
+	top: calc(var(--unit) * -3)
+}
+#Dsdownload:checked ~ label[for=DSsettings] img {
+	bottom: calc(var(--unit)*-12)
+}
+#Dsdownload:checked ~ #DsTouchDownload {
+	opacity: 1;
+	pointer-events: auto;
+}
+#Dsdownload:checked ~ #DsTouchDownload .DsTouchRibbon {
+	top: 0;
+}
+#Dsdownload:checked ~ #DsTouchDownload .DsTouchRibbon:last-of-type {
+	top: auto;
+	bottom: 0
+}
+#Dsdownload:checked ~ #DsTouchDownload .DsButton {
+	bottom: calc(var(--unit)*0.25);
+}
+#Dsdownload:checked ~ #DsTouchDownload .DsNotice {
+	top: calc(50% - 1px);
+}
+
+/* ========= */
+/* PictoChat */
+/* ========= */
+
+#DSpicto:checked ~ #DsTouchHome {
+	opacity: 0;
+	pointer-events: none;
+}
+#DSpicto:checked ~ #DsTouchHome #PictoChat {
+	top: calc(var(--unit) * -3)
+}
+#DSpicto:checked ~ label[for=DSsettings] img {
+	bottom: calc(var(--unit)*-12)
+}
+#DSpicto:checked ~ #DsTouchPicto {
+	opacity: 1;
+	pointer-events: auto;
+}
+#DSpicto:checked ~ #DsTouchPicto .DsTouchRibbon {
+	top: 0;
+}
+#DSpicto:checked ~ #DsTouchPicto .DsTouchRibbon:last-of-type {
+	top: auto;
+	bottom: 0
+}
+#DSpicto:checked ~ #DsTouchPicto .DsButton {
+	bottom: calc(var(--unit)*0.25);
+}
+#DSpicto:checked ~ #DsTouchPicto .DsNotice {
+	top: calc(50% - 1px);
+}
