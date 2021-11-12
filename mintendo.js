@@ -1,19 +1,15 @@
 const timer = ms => new Promise(res => setTimeout(res, ms))
 
-document.addEventListener('DOMContentLoaded', function() {
-
-
-
 //===============//
 // BOTTOM SCREEN //
 //===============//
 
 //Brightness
-const BrightnessTop = document.getElementById('BrightnessTop');
-const Brightnessbottom = document.getElementById('Brightnessbottom');
 var brightness = 0.4
 
 let changeBright = () => {
+	const BrightnessTop = document.getElementById('BrightnessTop');
+	const Brightnessbottom = document.getElementById('Brightnessbottom');
 	brightness -= 0.1
 	if (brightness < 0) { brightness = 0.4 }
 	BrightnessTop.style = "background: rgba(0,0,0," + brightness + ")"
@@ -21,12 +17,10 @@ let changeBright = () => {
 }
 
 //Sync top and bottom screen in settings
-const DSsettings = document.getElementById('DSsettings');
-const Dsdownload = document.getElementById('Dsdownload');
-const DSpicto = document.getElementById('DSpicto');
-const DSTopLift = document.getElementById('DSTopLift');
 
 async function syncScreenSettings() {
+	const DSTopLift = document.getElementById('DSTopLift');
+	const DSsettings = document.getElementById('DSsettings');
 	if (!DSTopLift.checked) {
 		await timer(1750)
 	}
@@ -37,6 +31,8 @@ async function syncScreenSettings() {
 }
 
 async function syncScreensDownload() {
+	const DSTopLift = document.getElementById('DSTopLift');
+	const Dsdownload = document.getElementById('Dsdownload');
 	if (!DSTopLift.checked) {
 		await timer(1750)
 	}
@@ -47,6 +43,8 @@ async function syncScreensDownload() {
 }
 
 async function syncScreenPicto() {
+	const DSTopLift = document.getElementById('DSTopLift');
+	const DSpicto = document.getElementById('DSpicto');
 	if (!DSTopLift.checked) {
 		await timer(1750)
 	}
@@ -57,11 +55,10 @@ async function syncScreenPicto() {
 }
 
 //Fade root setting menus
-const fadeToggles = document.querySelectorAll(".DsFader");
-const DsOpenIcon = document.querySelectorAll(".DsOpenIcon");
-const DSBannerLift = document.getElementById('DSBannerLift');
 
 function fadeRoots(head, text) {
+	const fadeToggles = document.querySelectorAll(".DsFader");
+	const DSBannerLift = document.getElementById('DSBannerLift');
 	fadeToggles.forEach(div => {
 		div.style = "z-index: 5"
 	})
@@ -70,6 +67,8 @@ function fadeRoots(head, text) {
 }
 
 function openRoots() {
+	const fadeToggles = document.querySelectorAll(".DsFader");
+	const DsOpenIcon = document.querySelectorAll(".DsOpenIcon");
 	DsOpenIcon.forEach(r => {
 		r.checked = false
 	})
@@ -84,28 +83,28 @@ function openRoots() {
 //============//
 
 //Edit Banner text
-const DsBAh = document.querySelector('#DsBa h');
-const DsBAp = document.querySelector('#DsBa p');
 
 function changeBannerAtext(heading, desript) {
+	const DsBAh = document.querySelector('#DsBa h');
+	const DsBAp = document.querySelector('#DsBa p');
 	DsBAh.innerText = heading
 	DsBAp.innerText = desript
 }
 
-const DsBBh = document.querySelector('#DsBb h');
-const DsBBp = document.querySelector('#DsBb p');
-
 function changeBannerBtext(heading, desript) {
+	const DsBBh = document.querySelector('#DsBb h');
+	const DsBBp = document.querySelector('#DsBb p');
 	DsBBh.innerText = heading
 	DsBBp.innerText = desript
 }
 
 //Draw DS CALANDER
-const DsCalandList = document.getElementById('DsCalandList');
-const DsMonth = document.getElementById('DsMonth');
-const DSRibbonDate = document.getElementById('DSRibbonDate');
+
 
 let createDSCalander = () => {
+	const DsCalandList = document.getElementById('DsCalandList');
+	const DsMonth = document.getElementById('DsMonth');
+	const DSRibbonDate = document.getElementById('DSRibbonDate');
 	const DaysofWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 	
 	var year = new Date().getFullYear()
@@ -151,12 +150,11 @@ let createDSCalander = () => {
 	DSRibbonDate.innerText = monthIndex + "/" + year.toString().substring(2)
 }
 
-createDSCalander()
+document.addEventListener('DOMContentLoaded', createDSCalander(), false);
 
 //Draw DS CLOCK
-const DsClockCanva = document.getElementById('DsClockCanva');
-const Clockctx = DsClockCanva.getContext('2d');
-const DSRibbonTime = document.getElementById('DSRibbonTime');
+
+
 
 let drawDsClockFace = (ctx) => {
 	const NumCoords = [
@@ -268,6 +266,8 @@ let drawHand = (ctx, pos, length, width) => {
 }
 
 let UpdateFace = () => {
+	const DsClockCanva = document.getElementById('DsClockCanva');
+	const Clockctx = DsClockCanva.getContext('2d');
 	drawDsClockFull(Clockctx)
 }
 
@@ -275,6 +275,7 @@ var run = setInterval(UpdateFace, 1000);
 
 let i = 0
 let UpdateRibbonClock = () => {
+	const DSRibbonTime = document.getElementById('DSRibbonTime');
 	var now = new Date();
 	var hour = now.getHours();
 	var minute = now.getMinutes();
@@ -292,5 +293,3 @@ let UpdateRibbonClock = () => {
 }
 
 var run2 = setInterval(UpdateRibbonClock, 500);
-
-}, false);
