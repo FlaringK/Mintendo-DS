@@ -602,6 +602,7 @@ body > div {
 	transition-delay: 2s;
 	
 	cursor: pointer;
+	line-height: 0.7em;
 }
 
 /* ================== */
